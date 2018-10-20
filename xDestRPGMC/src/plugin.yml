@@ -1,0 +1,30 @@
+name: xDestMCRPG
+
+main: com.xdest.mcrpg.MCRPG
+softedepend: [xDVault]
+
+api-version: 1.13
+
+version: 0.1
+commands:
+    getlevel:
+        usage: /getlevel
+        description: Get RPG level
+    setrpgexp:
+        usage: /addrpgexp <exp>
+        description: Add exp
+    getrpgexp:
+        usage: /getrpgexp
+        description: Get exp
+    balance:
+        usage: /balance
+        description: Get balance
+    setbal:
+        usage: /setbal <bal>
+        description: Set balance
+    customitem:
+        usage: /customitem <add/summon/reload/export> [(summon/add?)id]
+        description: Create or summon a custom item, or reload custom items
+    tradeprofile:
+        usage: /tradeprofile <create/add-v/add-c/summon> <id> [(summon?)mob_type] [(create?)name] [(add?)tradeid] [(add?)cost] [(add?)level] [(add?)buy] [(add?)stock] [(add?custom)id]
+        description: Modify or summon trades
