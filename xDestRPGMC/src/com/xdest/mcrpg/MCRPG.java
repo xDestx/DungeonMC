@@ -26,6 +26,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.xdest.mcrpg.quest.KillQuest;
 import com.xdest.mcrpg.trade.CustomItem;
 import com.xdest.mcrpg.trade.CustomTradeItem;
 import com.xdest.mcrpg.trade.DefaultTradeItem;
@@ -51,6 +52,9 @@ public class MCRPG extends JavaPlugin {
 		TradeProfile.loadTradeProfiles();
 		loadRPGEntities();
 		loadMerchantEntities();
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			new KillQuest(this, p, "test0", new EntityType[] {EntityType.ZOMBIE}, 5, 1500, new ItemStack[] {new ItemStack(Material.NAUTILUS_SHELL, 64),new ItemStack(Material.NAUTILUS_SHELL, 64),new ItemStack(Material.NAUTILUS_SHELL, 64)}, new String[] {"excalibur"});
+		}
 	}
 
 	
@@ -410,6 +414,14 @@ public class MCRPG extends JavaPlugin {
 				}
 			} else {
 				return false;
+			}
+		}
+		if(label.equalsIgnoreCase("xpmod")) {
+			if(sender instanceof Player) {
+				Player p = (Player)sender;
+				RPGEntity rpge = this.getRPGEntity(p.getUniqueId().toString());
+				p.sendMessage("Current mod: " + (int)(rpge.getFinalMod()*100) + "%");
+				return true;
 			}
 		}
 		return false;

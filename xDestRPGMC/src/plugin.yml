@@ -28,3 +28,6 @@ commands:
     tradeprofile:
         usage: /tradeprofile <create/add-v/add-c/summon> <id> [(summon?)mob_type] [(create?)name] [(add?)tradeid] [(add?)cost] [(add?)level] [(add?)buy] [(add?)stock] [(add?custom)id]
         description: Modify or summon trades
+    xpmod:
+        usage: /xpmod
+        description: get current xp mod
