@@ -6,41 +6,40 @@ import org.bukkit.World;
 public class RectangularRegion implements WorldRegion {
 
 	private Location corner1, corner2;
-	private int c1x, c1y, c1z, c2x, c2y, c2z;
+	private int[] coords;
+	/*
+	 * 0 c1 x
+	 * 1 c1 y
+	 * 2 c1 z
+	 * 3 c2 x
+	 * 4 c2 y
+	 * 5 c2 z
+	 * 
+	 */
 	
 	public RectangularRegion(Location l1, Location l2) throws MismatchedWorldException {
 		if(l2.getWorld().equals(l1.getWorld())) {
-			corner1 = l1;
-			corner2 = l2;
-			c1x = l1.getBlockX();
-			c1y = l1.getBlockY();
-			c1z = l1.getBlockZ();
-			c2x = l2.getBlockX();
-			c2y = l2.getBlockY();
-			c2z = l2.getBlockZ();
-			fixCoords();
+			corner1 = l1.clone();
+			corner2 = l2.clone();
+			coords[0] = l1.getBlockX();
+			coords[1] = l1.getBlockY();
+			coords[2] = l1.getBlockZ();
+			coords[3] = l2.getBlockX();
+			coords[4] = l2.getBlockY();
+			coords[5] = l2.getBlockZ();
+			coords = Util.fixCoords(coords);
+			corner1.setX(coords[0]);
+			corner1.setY(coords[1]);
+			corner1.setZ(coords[2]);
+			corner2.setX(coords[3]);
+			corner2.setY(coords[4]);
+			corner2.setZ(coords[5]);
 		} else {
 			throw new MismatchedWorldException();
 		}
 	}
 	
-	private void fixCoords() {
-		if(c1x > c2x) {
-			int x = c1x;
-			c1x = c2x;
-			c2x = x;
-		}
-		if(c1y > c2y) {
-			int y = c1y;
-			c1y = c2y;
-			c2y = y;
-		}
-		if(c1z > c2z) {
-			int z = c1z;
-			c1z = c2z;
-			c2z = z;
-		}
-	}
+	
 	
 	@Override
 	public boolean contains(Location l) {
@@ -49,9 +48,9 @@ public class RectangularRegion implements WorldRegion {
 			lx = l.getBlockX();
 			ly = l.getBlockY();
 			lz = l.getBlockZ();
-			if (c1x + lx <= c2x) {
-				if(c1y + ly <= c2y) {
-					if(c1z + lz <= c2z) {
+			if (coords[0] + lx <= coords[3]) {
+				if(coords[1] + ly <= coords[4]) {
+					if(coords[2] + lz <= coords[5]) {
 						return true;
 					}
 				}

@@ -1,11 +1,20 @@
 package com.xdest.mcrpg.town;
 
-import org.bukkit.Location;
+import com.xdest.mcrpg.util.RectangularRegion;
 
 public class InnRoom {
 	
-	private Location coord1, coord2;
-	private String innId;
+
+	
+	
+	private RectangularRegion region;
+	private String innId, id;
+	
+	public InnRoom(RectangularRegion r, String id, String innId) {
+		this.innId = innId;
+		region = r;
+		this.id = id;
+	}
 	
 	
 }
